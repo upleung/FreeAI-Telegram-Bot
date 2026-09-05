@@ -34,7 +34,7 @@
 本教程以 [Katabump](https://katabump.com/) 的 Python 容器为例，其他提供 Python 环境的面板（如 Pterodactyl 翼龙面板）操作逻辑完全一致。
 
 ### 1. 准备核心密钥
-*   **Telegram Bot Token**：在 TG 中向 `@BotFather` 发送 `/newbot` 获取。（TG_ID通过 `@getidsbot `或 `@userinfobot `获取）
+*   **Telegram Bot Token**：在 TG 中向 `@BotFather` 发送 `/newbot` 获取。
 *   **OpenRouter API Key**：前往 [OpenRouter 控制台](https://openrouter.ai/keys) 免费生成。
 *   **Hugging Face Token**：前往 [HF Settings](https://huggingface.co/settings/tokens) 创建一个 `⚡Inference` 或 `Read` 权限的密钥。
   (建议用⚡Inference)
@@ -58,12 +58,14 @@ TELEGRAM_BOT_TOKEN=你的TG机器人Token
 ALLOWED_TELEGRAM_USER_IDS=你的纯数字TG_ID (多个用逗号隔开，填 * 允许所有人)
 ADMIN_USER_IDS=你的纯数字TG_ID (用于解锁 /stats 数据统计)
 
+
 # 2️⃣--- 文本聊天配置 (OpenRouter) ---
 OPENAI_BASE_URL=https://openrouter.ai/api/v1
 OPENAI_API_KEY=sk-or-xxxx你的OpenRouter密钥xxxx
 OPENAI_MODEL=minimax/minimax-m3:free
 VISION_MODEL="minimax/minimax-m3:free"
 MAX_TOKENS=2000
+
 
 # 3️⃣--- 画图配置 (Hugging Face) ---
 ENABLE_IMAGE_GENERATION=true
@@ -72,6 +74,8 @@ HF_IMAGE_MODEL=black-forest-labs/FLUX.1-schnell
 ENABLE_IMAGE_GENERATION=true
 
 ```
+*（备注：TG_ID通过 `@getidsbot` 或 `@userinfobot` 机器人获取）*
+<br>
 
 ### 5. 校准启动命令并运行
 
