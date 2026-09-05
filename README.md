@@ -12,7 +12,7 @@
 
 ## ✨ 核心特性
 
-*   💬 **无限制对话**：原生支持 OpenRouter 聚合接口，轻松调用 `Gemini 1.5 Pro`、`Llama 3.1`、`DeepSeek` 等顶级免费大模型。
+*   💬 **无限制对话**：原生支持 OpenRouter 聚合接口，轻松调用 `MiniMax-M3`、`Qwen3.8`、`DeepSeek` 等顶级免费大模型。
 *   🎨 **高阶 AI 画图**：内置 Hugging Face Inference Providers，支持 `FLUX.1-schnell`、`Stable Diffusion XL` 等顶级开源视觉模型，彻底告别旧版 410/403 报错。
 *   ⚡ **极简容器部署**：专为 Python 容器和 Serverless 环境优化，无缝兼容各类云面板与本地服务器。
 *   🛡️ **严格白名单过滤**：支持自定义 TG 用户 ID 鉴权，防滥用、防盗刷。
