@@ -74,7 +74,7 @@ HF_IMAGE_MODEL=black-forest-labs/FLUX.1-schnell
 ENABLE_IMAGE_GENERATION=true
 
 ```
-*（备注：TG_ID通过 `@getidsbot` 或 `@userinfobot` 机器人获取）*
+（备注：TG_ID通过 `@getidsbot` 或 `@userinfobot` 机器人获取）
 <br>
 
 ### 5. 校准启动命令并运行
