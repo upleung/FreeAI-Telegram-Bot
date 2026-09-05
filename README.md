@@ -23,9 +23,9 @@
 
 本项目运行轻量，理论上支持任何提供 Python 3.10+ 运行环境的设备或平台。
 
-*   **PaaS / 容器托管面板**：Katabump、Serv00、Render、Hugging Face Spaces 等。
+*   **PaaS / 容器托管面板**：Katabump、Serv00、Fly.io、Render、Hugging Face Spaces 等。
 *   **云服务器 (VPS)**：AWS、GCP、Oracle Cloud (OCI) 等各类 Linux 主机。
-*   **本地服务器 / HomeLab**：DIY NAS、ARM 架构单板机（如玩客云、N1、RK3566 开发板）、Debian/Ubuntu/OpenWrt 软路由环境。
+*   **本地服务器 / HomeLab**：DIY NAS、ARM 架构单板机（如玩客云、N1、OECT、RK3566 开发板、已刷Armbian的S905系列盒子等）、Debian/Ubuntu/OpenWrt 软路由环境。
 
 ---
 
@@ -36,12 +36,13 @@
 ### 1. 准备核心密钥
 *   **Telegram Bot Token**：在 TG 中向 `@BotFather` 发送 `/newbot` 获取。
 *   **OpenRouter API Key**：前往 [OpenRouter 控制台](https://openrouter.ai/keys) 免费生成。
-*   **Hugging Face Token**：前往 [HF Settings](https://huggingface.co/settings/tokens) 创建一个 `Fine-grained` 或 `Read` 权限的密钥。
+*   **Hugging Face Token**：前往 [HF Settings](https://huggingface.co/settings/tokens) 创建一个 `⚡Inference` 或 `Read` 权限的密钥。
+  (建议用⚡Inference)
 
 ### 2. 上传并解压项目
 1.  在本项目 GitHub 页面点击 **Code -> Download ZIP**。
 2.  进入 Katabump 面板的 **Files（文件管理）**，上传该 ZIP 并右键点击 **Unarchive（解压）**。
-3.  确保项目核心文件（如 `requirements.txt` 和 `bot/` 文件夹）直接位于 `/home/container/` 根目录。
+3.  确保项目核心文件（如 `requirements.txt` 和 `bot/` 文件夹）直接位于 `/home/container/` 根目录。 (建议直接用SFTP上传)
 
 ### 3. 配置运行依赖
 1.  在面板 **Files** 中找到 `requirements.txt`。
@@ -49,31 +50,32 @@
 3.  容器启动时会自动抓取并安装所有依赖。
 
 ### 4. 环境变量配置 (.env)
-复制根目录的 `.env.example` 并重命名为 `.env`，填入以下参数：
+打开根目录的 `.env`文件，填入以下参数：
 
 ```
-# --- TG 机器人基础配置 ---
+# 1️⃣--- TG 机器人基础配置 ---
 TELEGRAM_BOT_TOKEN=你的TG机器人Token
 ALLOWED_TELEGRAM_USER_IDS=你的纯数字TG_ID (多个用逗号隔开，填 * 允许所有人)
 ADMIN_USER_IDS=你的纯数字TG_ID (用于解锁 /stats 数据统计)
 
-# --- 文本聊天配置 (OpenRouter) ---
-OPENAI_BASE_URL=[https://openrouter.ai/api/v1](https://openrouter.ai/api/v1)
+# 2️⃣--- 文本聊天配置 (OpenRouter) ---
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
 OPENAI_API_KEY=sk-or-xxxx你的OpenRouter密钥xxxx
-OPENAI_MODEL=google/gemini-1.5-pro-exp:free
+OPENAI_MODEL=minimax/minimax-m3:free
+VISION_MODEL="minimax/minimax-m3:free"
 MAX_TOKENS=2000
 
-# --- 画图配置 (Hugging Face) ---
+# 3️⃣--- 画图配置 (Hugging Face) ---
 ENABLE_IMAGE_GENERATION=true
 HF_TOKEN=hf_xxxx你的HF密钥xxxx
-# 推荐使用 SDXL (免协议无限制) 或 FLUX.1-schnell
-HF_IMAGE_MODEL=stabilityai/stable-diffusion-xl-base-1.0
+HF_IMAGE_MODEL=black-forest-labs/FLUX.1-schnell
+ENABLE_IMAGE_GENERATION=true
 
 ```
 
 ### 5. 校准启动命令并运行
 
-1. 进入面板的 **Startup（启动设置）** 标签页。
+1. 进入面板的 **Startup（启动设置）** 标签页。找到 **Docker Image** 选`Python 3.12`
 2. 找到 **Python File** 启动变量，将默认值修改为：`bot/main.py`。
 3. 返回 **Console（控制台）**，点击 **Start** 启动服务器。
 4. 当控制台输出 `Application started`，即可前往 Telegram 向机器人发送 `/start` 开始体验！
@@ -83,8 +85,8 @@ HF_IMAGE_MODEL=stabilityai/stable-diffusion-xl-base-1.0
 ## 💡 温馨提示与排坑指南
 
 * **替代环境方案**：如遇 Katabump 平台无法注册、资源售罄或容器频繁离线，建议迁移至 Serv00、Render，或直接使用你手头的云服务器部署。
-* **资源合规使用**：无论是容器托管商的计算资源，还是 OpenRouter / Hugging Face 提供的免费 API 额度，**请务必不要滥用**。TG Bot 建议作为个人测试、技术学习及备用 AI 工具使用，共同维护良好的开源白嫖生态。
-* **画图模型报错 (`403 Forbidden`)**：Hugging Face 的部分新模型（如 SD 3.5 / FLUX）已被移出免费 Serverless 额度或需要签署网页免责协议。若遇 403 错误，请在 `.env` 中降级至完全免费开源的 `stabilityai/stable-diffusion-xl-base-1.0`。
+* **资源合规使用**：无论是容器托管商的计算资源，还是 OpenRouter / Hugging Face 提供的免费 API 额度，**最好是根据自己的实际需求去使用**。TG Bot 建议作为个人测试、技术学习及备用 AI 工具使用，共同维护良好的开源白嫖生态。
+* **画图模型报错 (`403 Forbidden`)**：Hugging Face 的部分新模型（如 SD 3.5 / FLUX）已被移出免费 Serverless 额度或需要签署网页免责协议。若遇 403 错误，请在 `.env` 中降级至完全免费开源的 `black-forest-labs/FLUX.1-schnell` 或 `stabilityai/stable-diffusion-xl-base-1.0`
 * **API 限流 (`429 Rate Limit`)**：遇到免费通道拥堵时，稍等几分钟后重新发送指令即可恢复。
 
 ---
