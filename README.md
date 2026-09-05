@@ -34,7 +34,7 @@
 本教程以 [Katabump](https://katabump.com/) 的 Python 容器为例，其他提供 Python 环境的面板（如 Pterodactyl 翼龙面板）操作逻辑完全一致。
 
 ### 1. 准备核心密钥
-*   **Telegram Bot Token**：在 TG 中向 `@BotFather` 发送 `/newbot` 获取。
+*   **Telegram Bot Token**：在 TG 中向 `@BotFather` 发送 `/newbot` 获取。（TG_ID通过 `@getidsbot `或 `@userinfobot `获取）
 *   **OpenRouter API Key**：前往 [OpenRouter 控制台](https://openrouter.ai/keys) 免费生成。
 *   **Hugging Face Token**：前往 [HF Settings](https://huggingface.co/settings/tokens) 创建一个 `⚡Inference` 或 `Read` 权限的密钥。
   (建议用⚡Inference)
