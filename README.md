@@ -99,4 +99,4 @@ HF_IMAGE_MODEL=stabilityai/stable-diffusion-xl-base-1.0
 * [OpenRouter](https://openrouter.ai/models?q=free&output_modalities=text) - 顶级的开源大模型聚合分发接口
 * [Hugging Face](https://huggingface.co/) - 开源 AI 社区及 Inference API 算力支持
 * [AMD Radeon TokenFactory](https://developer.amd.com.cn/radeon/tokenfactory) - AMD GPU Cloud 提供的优质 OpenAI 兼容节点支持
-
+* [环境变量.env进阶设置](https://github.com/n3d1117/chatgpt-telegram-bot/blob/main/README.md) - 参数自定义修改请参考原项目文档
