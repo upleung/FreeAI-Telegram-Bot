@@ -1,6 +1,6 @@
 python-dotenv~=1.0.0
 pydub~=0.25.1
-tiktoken==0.7.0
+tiktoken>=0.5.0  # Use a more recent version with wider ARM support
 openai==1.58.1
 python-telegram-bot==21.9
 requests~=2.32.3
