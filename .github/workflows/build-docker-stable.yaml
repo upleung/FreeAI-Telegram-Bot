@@ -47,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64 # linux/arm/v7 仅编译 amd64 和 arm64
+          platforms: linux/amd64,linux/arm64 # 仅编译 amd64 和 arm64 稳定版
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
