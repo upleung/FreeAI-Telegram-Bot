@@ -1,4 +1,4 @@
-name: Publish Docker image V3
+name: Build Docker Full
 
 on:
   workflow_dispatch:
