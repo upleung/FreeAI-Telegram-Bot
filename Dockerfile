@@ -19,7 +19,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 # 注入 piwheels 源，强制优先使用已构建好的预编译 wheel
 COPY requirements.txt .
-RUN pip install --no-cache-dir --prefer-binary -r requirements.txt --extra-index-url https://www.piwheels.org/simple
+RUN pip install --no-cache-dir --prefer-binary --only-binary=tiktoken -r requirements.txt --extra-index-url https://www.piwheels.org/simple
 
 
 # ---- 第二阶段：极简运行环境 (Runner) ----
