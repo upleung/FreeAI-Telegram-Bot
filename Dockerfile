@@ -5,8 +5,10 @@ ENV PYTHONFAULTHANDLER=1 \
      PYTHONDONTWRITEBYTECODE=1 \
      PIP_DISABLE_PIP_VERSION_CHECK=on
 
-# slim 基于 Debian，使用 apt-get 安装 ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+# 关键优化：加入 --no-install-recommends，拒绝拉取多余的图形与音频依赖
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY . .
