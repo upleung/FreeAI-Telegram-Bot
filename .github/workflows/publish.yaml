@@ -3,6 +3,7 @@
 name: Publish Docker image
 
 on:
+  workflow_dispatch: # 开启 Actions 面板的手动触发运行按钮
   release:
     types: [published]
 
