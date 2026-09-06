@@ -1,4 +1,4 @@
-name: Publish Docker image New Version
+name: build docker new
 
 on:
   workflow_dispatch:
@@ -14,10 +14,10 @@ jobs:
       contents: read
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4 # 升级至 v4 解决 Node 20 弃用警告
+        uses: actions/checkout@v4 # 升级至 v4 消除 Node 20 警告
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3 # 升级组件
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -35,7 +35,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata
+      - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
@@ -43,11 +43,14 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/freeai-telegram-bot
             ghcr.io/${{ github.repository }}
 
-      - name: Build and push
+      - name: Build and push Docker images
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64,linux/arm/v7 # 开启三大架构
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          # 引入 GitHub Actions 原生缓存技术，加速 ARMv7 的 QEMU 编译
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
