@@ -1,4 +1,4 @@
-name: Build Docker Full
+name: Build Docker Stable
 
 on:
   workflow_dispatch:
@@ -47,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7 # 开启三大架构
+          platforms: linux/amd64,linux/arm64 # linux/arm/v7 仅编译 amd64 和 arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
