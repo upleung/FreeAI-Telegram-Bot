@@ -17,9 +17,9 @@ RUN apt-get update && \
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# 注入 piwheels 源，并安装所有依赖到虚拟环境中
+# 注入 piwheels 源，强制优先使用已构建好的预编译 wheel
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt --extra-index-url https://www.piwheels.org/simple
+RUN pip install --no-cache-dir --prefer-binary -r requirements.txt --extra-index-url https://www.piwheels.org/simple
 
 
 # ---- 第二阶段：极简运行环境 (Runner) ----
